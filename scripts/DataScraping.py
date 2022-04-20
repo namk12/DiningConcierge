@@ -105,18 +105,14 @@ def query_api(term, location):
         newterm = cuisine+ ' restaurants'
         total = getTotal(API_KEY, newterm, location)
         print(total, cuisine)
-        run = 0
         maxOffSet = int(total / 50)
         businesses = []
         for offSet in range(0, maxOffSet+1):
-            if run == 25:
-                break
             response = search(API_KEY, newterm, location, offSet*50)
             if response.get('businesses') is None:
                 break
             businesses.append(response.get('businesses'))
-            run+=1
-
+           
         printVar = []
         for buis in businesses:
             for b in buis:
